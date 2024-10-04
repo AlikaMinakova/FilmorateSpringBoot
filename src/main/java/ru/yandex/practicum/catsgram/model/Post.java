@@ -1,7 +1,16 @@
 package ru.yandex.practicum.catsgram.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.time.Instant;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class Post {
     private final String author;
     private final Instant createDate = Instant.now(); //    create date
@@ -12,39 +21,5 @@ public class Post {
         this.author = author;
         this.description = description;
         this.photoUrl = photoUrl;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public Instant getCreateDate() {
-        return createDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "author='" + author + '\'' +
-                ", createDate=" + createDate +
-                ", description='" + description + '\'' +
-                ", photoUrl='" + photoUrl + '\'' +
-                '}';
     }
 }
