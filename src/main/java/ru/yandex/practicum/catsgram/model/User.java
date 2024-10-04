@@ -11,6 +11,7 @@ import java.util.Objects;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+//@Data - заменяет 5 базовых аннотаций (@RequiredArgsConstructor - все final поля)
 public class User {
     private String email;
     @EqualsAndHashCode.Exclude

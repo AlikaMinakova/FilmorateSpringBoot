@@ -4,10 +4,8 @@ import lombok.*;
 
 import java.time.Instant;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+//lombok
+@Data
 @AllArgsConstructor
 public class Post {
     private final String author;
