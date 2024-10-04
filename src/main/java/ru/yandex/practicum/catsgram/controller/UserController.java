@@ -1,5 +1,7 @@
 package ru.yandex.practicum.catsgram.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.catsgram.exception.InvalidEmailException;
 import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
@@ -14,10 +16,12 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private HashMap<String, User> users = new HashMap<>();
 
     @GetMapping("")
     public HashMap<String, User> findAll() {
+        log.info("Количество залогированных юзеров: {}", users.size());
         return users;
     }
 
@@ -29,6 +33,7 @@ public class UserController {
         if (users.containsKey(user.getEmail())) {
             throw new UserAlreadyExistException("user already exists");
         }
+        log.info("Пользователь {} сохранён", user);
         users.put(user.getEmail(), user);
         return user;
     }
