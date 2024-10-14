@@ -2,9 +2,7 @@ package ru.yandex.practicum.catsgram.model;
 
 import lombok.*;
 
-import javax.management.ConstructorParameters;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Getter
 @Setter

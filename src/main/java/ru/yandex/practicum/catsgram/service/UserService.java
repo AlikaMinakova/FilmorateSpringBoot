@@ -3,10 +3,6 @@ package ru.yandex.practicum.catsgram.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import ru.yandex.practicum.catsgram.controller.UserController;
 import ru.yandex.practicum.catsgram.exception.InvalidEmailException;
 import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
@@ -24,6 +20,11 @@ public class UserService {
     public HashMap<String, User> findAll() {
         log.info("Количество залогированных юзеров: {}", users.size());
         return users;
+    }
+
+    public User findByEmail(String email) {
+        log.info("Получен пользователь: {}", users.get(email));
+        return users.get(email);
     }
 
 

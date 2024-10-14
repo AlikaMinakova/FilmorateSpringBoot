@@ -8,6 +8,8 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 public class Post {
+
+    private Integer id;
     private final String author;
     private final Instant createDate = Instant.now(); //    create date
     private String description;
