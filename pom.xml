@@ -60,6 +60,15 @@
 			<scope>provided</scope> <!-- будет использоваться тольк она этапе компиляции -->
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId> <!--настраивает подключение к базе данных через application.properties-->
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
