@@ -1,0 +1,92 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.7
+-- Dumped by pg_dump version 15.7
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: cat_post; Type: TABLE; Schema: public; Owner: kitty
+--
+
+CREATE TABLE public.cat_post (
+    id integer NOT NULL,
+    description character varying(500),
+    photourl character varying(1000),
+    createdate date,
+    author character varying NOT NULL
+);
+
+
+ALTER TABLE public.cat_post OWNER TO kitty;
+
+--
+-- Name: cat_post_id_seq; Type: SEQUENCE; Schema: public; Owner: kitty
+--
+
+ALTER TABLE public.cat_post ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.cat_post_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: cat_user; Type: TABLE; Schema: public; Owner: kitty
+--
+
+CREATE TABLE public.cat_user (
+    email character varying NOT NULL,
+    nickname character varying(255),
+    birthday date
+);
+
+
+ALTER TABLE public.cat_user OWNER TO kitty;
+
+--
+-- Name: cat_post cat_post_pkey; Type: CONSTRAINT; Schema: public; Owner: kitty
+--
+
+ALTER TABLE ONLY public.cat_post
+    ADD CONSTRAINT cat_post_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cat_user cat_user_pkey; Type: CONSTRAINT; Schema: public; Owner: kitty
+--
+
+ALTER TABLE ONLY public.cat_user
+    ADD CONSTRAINT cat_user_pkey PRIMARY KEY (email);
+
+
+--
+-- Name: cat_post fk_author; Type: FK CONSTRAINT; Schema: public; Owner: kitty
+--
+
+ALTER TABLE ONLY public.cat_post
+    ADD CONSTRAINT fk_author FOREIGN KEY (author) REFERENCES public.cat_user(email) NOT VALID;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
