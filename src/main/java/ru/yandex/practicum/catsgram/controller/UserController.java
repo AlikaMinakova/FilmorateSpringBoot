@@ -1,5 +1,6 @@
 package ru.yandex.practicum.catsgram.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -8,9 +9,7 @@ import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
 import ru.yandex.practicum.catsgram.model.User;
 import ru.yandex.practicum.catsgram.service.UserService;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/users")
@@ -18,17 +17,18 @@ public class UserController {
 
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("")
-    public HashMap<String, User> findAll() {
+    public Collection<User> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{email}")
-    public User finByEmail(@PathVariable String email) {
+    public Optional<User> finByEmail(@PathVariable String email) {
         // @PathVariable - получить значение из строки запроса, имя в параметре и переменной пути должны совпадать
         return userService.findByEmail(email);
     }
