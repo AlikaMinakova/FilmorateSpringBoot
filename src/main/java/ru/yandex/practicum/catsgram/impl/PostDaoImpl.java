@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -22,7 +23,7 @@ public class PostDaoImpl implements PostDao {
     }
 
     @Override
-    public Collection<Post> findAllByUser(User user) {
+    public List<Post> findAllByUser(User user) {
         String sql = "select * from cat_post where author = ? order by createdate desc";
         return jdbcTemplate.query(sql, new RowMapper<Post>() {
             @Override
@@ -37,7 +38,7 @@ public class PostDaoImpl implements PostDao {
     }
 
     @Override
-    public Collection<Post> findAll(Collection<User> users, Integer size, String sort) {
+    public List<Post> findAll(Collection<User> users, Integer size, String sort) {
         String sql = "select * from cat_post order by createdate " + sort + " limit " + size;
         return jdbcTemplate.query(sql, (rs, rowNum) -> makePost(rs, users));
     }

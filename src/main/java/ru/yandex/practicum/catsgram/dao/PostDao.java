@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostDao {
-    Collection<Post> findAllByUser(User user);
-    Collection<Post> findAll(Collection<User> users, Integer size, String sort);
+    List<Post> findAllByUser(User user);
+    List<Post> findAll(Collection<User> users, Integer size, String sort);
 }

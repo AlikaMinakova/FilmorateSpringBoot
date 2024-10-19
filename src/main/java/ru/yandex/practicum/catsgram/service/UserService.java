@@ -11,6 +11,7 @@ import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
 import ru.yandex.practicum.catsgram.model.User;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,11 +25,11 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public Collection<User> findAll() {
+    public List<User> findAll() {
         return userDao.findAll();
     }
 
-    public Optional<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
 

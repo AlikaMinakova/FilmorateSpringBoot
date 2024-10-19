@@ -25,12 +25,12 @@ public class PostService {
         this.userService = userService;
     }
 
-    public Collection<Post> findAllByUser(String userId) {
-        User user = userService.findByEmail(userId).orElseThrow(() -> new UserNotFoundException("пользователь не найден"));
+    public List<Post> findAllByUser(String userId) {
+        User user = userService.findByEmail(userId);
         return postDao.findAllByUser(user);
     }
 
-    public Collection<Post> findAllByUser(String userId, Integer size, String sort){
+    public List<Post> findAllByUser(String userId, Integer size, String sort){
         return findAllByUser(userId)
                 .stream()
                 .sorted((p0, p1) -> {
@@ -44,8 +44,8 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public Collection<Post> findAll(int size, String sort) {
-        Collection<User> user = userService.findAll();
+    public List<Post> findAll(int size, String sort) {
+        List<User> user = userService.findAll();
         return postDao.findAll(user, size, sort);
     }
 

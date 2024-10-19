@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping(value = "/post")
-    public Collection<Post> findAllByAuthorWithParams(@RequestParam String userId,
+    public List<Post> findAllByAuthorWithParams(@RequestParam String userId,
                                                       @RequestParam(value = "size", defaultValue = "10") String size,
                                                       @RequestParam(value = "sort", defaultValue = "asc") String sort)
     {// @RequestBody - получить значения из Body
@@ -36,7 +36,7 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public Collection<Post> findAll(@RequestParam(value = "size", defaultValue = "10") String size,
+    public List<Post> findAll(@RequestParam(value = "size", defaultValue = "10") String size,
                               @RequestParam(value = "sort", defaultValue = "asc") String sort) {
         // обработчик запроса: posts?size=4&from=2
         return postService.findAll(Integer.parseInt(size), sort);

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -28,20 +29,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         SqlRowSet userRow = jdbcTemplate.queryForRowSet("select * from cat_user where email = ?", email);
         if (userRow.next()) {
             User user = new User(userRow.getString("email"),
                     userRow.getString("nickname"),
                     LocalDate.parse(Objects.requireNonNull(userRow.getString("birthday"))));
             log.info("Получен пользователь: {}", email);
-            return Optional.of(user);
+            return user;
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public Collection<User> findAll() {
+    public List<User> findAll() {
         String sql = "select * from cat_user";
         log.info("Получены все пользователи");
         return jdbcTemplate.query(sql, (rs, rowNum) -> makeUser(rs));
@@ -49,8 +50,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        Optional<User> userOptional = findByEmail(user.getEmail());
-        if (userOptional.isPresent()) {
+        User userOptional = findByEmail(user.getEmail());
+        if (userOptional == null) {
             log.info("Ошибка создания пользователя. Уже создан");
             throw new UserAlreadyExistException("пользователь уже создан");
         }
@@ -62,8 +63,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        Optional<User> userOptional = findByEmail(user.getEmail());
-        if (userOptional.isEmpty()) {
+        User userOptional = findByEmail(user.getEmail());
+        if (userOptional == null) {
             log.info("Ошибка обновления пользователя. Нет в бд");
             throw new UserNotFoundException("пользователя нет в бд");
         }
